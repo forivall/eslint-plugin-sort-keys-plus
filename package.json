@@ -1,9 +1,9 @@
 {
-  "name": "eslint-plugin-sort-keys-fix",
+  "name": "eslint-plugin-sort-keys-plus",
   "version": "1.1.2",
-  "description": "Fork of eslint rule that sorts keys in objects (https://eslint.org/docs/rules/sort-keys) with autofix enabled",
+  "description": "Fork of eslint rule that sorts keys in objects (https://eslint.org/docs/rules/sort-keys) with extra features",
   "repository": {
-    "url": "https://github.com/leo-buneev/eslint-plugin-sort-keys-fix",
+    "url": "https://github.com/forivall/eslint-plugin-sort-keys-plus",
     "type": "git"
   },
   "keywords": [
@@ -11,7 +11,10 @@
     "eslintplugin",
     "eslint-plugin"
   ],
-  "author": "Leonid Buneev <buneev.leonid@gmail.com>",
+  "author": "Emily M Klassen <forivall@gmail.com>",
+  "contributors": [
+    "Leonid Buneev <buneev.leonid@gmail.com>"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint ./lib",

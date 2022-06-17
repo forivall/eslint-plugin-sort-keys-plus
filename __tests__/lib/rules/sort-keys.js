@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 
 const path = require('path')
-const rule = require('../../../lib/rules/sort-keys-fix')
+const rule = require('../../../lib/rules/sort-keys')
 const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------

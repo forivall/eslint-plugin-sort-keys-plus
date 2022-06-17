@@ -1,4 +1,4 @@
-# eslint-plugin-sort-keys-fix
+# eslint-plugin-sort-keys-plus
 
 Fork of eslint rule that sorts keys in objects (https://eslint.org/docs/rules/sort-keys) with autofix enabled
 
@@ -10,38 +10,38 @@ You'll first need to install [ESLint](http://eslint.org):
 $ npm i eslint --save-dev
 ```
 
-Next, install `eslint-plugin-sort-keys-fix`:
+Next, install `eslint-plugin-sort-keys-plus`:
 
 ```
-$ npm install eslint-plugin-sort-keys-fix --save-dev
+$ npm install eslint-plugin-sort-keys-plus --save-dev
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-sort-keys-fix` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-sort-keys-plus` globally.
 
 ## Usage
 
-Add `sort-keys-fix` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `sort-keys-plus` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
   "plugins": [
-    "sort-keys-fix"
+    "sort-keys-plus"
   ]
 }
 ```
 
 
-Then add sort-keys-fix rule under the rules section.
+Then add sort-keys-plus rule under the rules section.
 
 ```json
 {
     "rules": {
-        "sort-keys-fix/sort-keys-fix": "warn"
+        "sort-keys-plus/sort-keys": "warn"
     }
 }
 ```
 
-Often it makes sense to enable `sort-keys-fix` only for certain files/directories. For cases like that, use override key of eslint config:
+Often it makes sense to enable `sort-keys-plus` only for certain files/directories. For cases like that, use override key of eslint config:
 
 ```jsonc
 {
@@ -52,7 +52,7 @@ Often it makes sense to enable `sort-keys-fix` only for certain files/directorie
     {
       "files": ["src/alphabetical.js", "bin/*.js", "lib/*.js"],
       "rules": {
-        "sort-keys-fix/sort-keys-fix": "warn"
+        "sort-keys-plus/sort-keys-plus": "warn"
       }
     }
   ]
@@ -61,7 +61,7 @@ Often it makes sense to enable `sort-keys-fix` only for certain files/directorie
 
 ## Rule configuration
 
-For available config options, see [official sort-keys reference](https://eslint.org/docs/rules/sort-keys#require-object-keys-to-be-sorted-sort-keys). All options supported by `sort-keys`, besides `minKeys`, are supported by `sort-keys-fix`.
+For available config options, see [official sort-keys reference](https://eslint.org/docs/rules/sort-keys#require-object-keys-to-be-sorted-sort-keys). All options supported by `sort-keys`, besides `minKeys`, are supported by `sort-keys-plus`.
 
 
 
