@@ -1,5 +1,6 @@
-'use strict';
+'use strict'
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
   plugins: ['eslint-plugin'],
@@ -12,4 +13,12 @@ module.exports = {
     'no-else-return': 'error',
     'vue/order-in-components': 0,
   },
+  overrides: [
+    {
+      files: '__tests__/**',
+      rules: {
+        'node/no-unpublished-require': 'off',
+      },
+    },
+  ],
 }

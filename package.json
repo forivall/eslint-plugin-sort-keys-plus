@@ -17,8 +17,8 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint ./lib",
-    "lint-fix": "eslint ./lib --fix",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
     "test": "jest",
     "test-debug": "node --inspect node_modules/.bin/jest --watch --runInBand"
   },
