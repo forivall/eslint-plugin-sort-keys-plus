@@ -17,6 +17,7 @@ module.exports = {
     {
       files: '__tests__/**',
       rules: {
+        'jsdoc/require-jsdoc': 'off',
         'node/no-unpublished-require': 'off',
       },
     },

@@ -769,7 +769,14 @@ const ruleTester = new RuleTester()
 ruleTester.run('sort-keys-fix', rule, test)
 
 const babelRuleTester = new RuleTester({
-  parser: path.resolve('node_modules/babel-eslint/lib/index.js'),
+  parser: path.resolve('node_modules/@babel/eslint-parser/lib/index.cjs'),
 })
 
-babelRuleTester.run('babel-eslint/sort-keys-fix', rule, test)
+function withSourceTypeModule(testCase) {
+  return { ...testCase, parserOptions: { requireConfigFile: false, ...testCase.parserOptions } }
+}
+
+babelRuleTester.run('babel-eslint/sort-keys-fix', rule, {
+  valid: test.valid.map(withSourceTypeModule),
+  invalid: test.invalid.map(withSourceTypeModule),
+})

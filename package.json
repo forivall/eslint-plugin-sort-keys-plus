@@ -30,7 +30,7 @@
     "requireindex": "~1.2.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.18.2",
     "eslint": "^8.17.0",
     "eslint-config-eslint": "^7.0.0",
     "eslint-config-prettier": "^8.5.0",
