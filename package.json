@@ -20,27 +20,26 @@
     "test-debug": "node --inspect node_modules/.bin/jest --watch --runInBand"
   },
   "dependencies": {
-    "espree": "^6.1.2",
+    "espree": "^9.3.2",
     "esutils": "^2.0.2",
+    "escape-string-regexp": "^4.0.0",
     "natural-compare": "^1.4.0",
     "requireindex": "~1.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "~6.6.0",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-tyrecheck": "https://tycgitlab.tyrecheck.com/leonid.buneev/eslint-plugin-tyrecheck.git",
-    "jest": "^25.4.0",
-    "prettier": "^1.19.1"
+    "eslint": "^8.17.0",
+    "eslint-config-eslint": "^7.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-jsdoc": "^39.3.2",
+    "eslint-plugin-eslint-plugin": "^4.2.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.1",
+    "prettier": "^2.7.1"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=10"
   },
   "license": "ISC"
 }

@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
-  extends: ['standard', 'plugin:prettier/recommended'],
+  plugins: ['eslint-plugin'],
+  extends: ['eslint', 'plugin:eslint-plugin/recommended', 'prettier'],
   rules: {
     'no-console': [process.env.NODE_ENV === 'production' ? 'error' : 0, { allow: ["warn", "error"] }],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 0,
