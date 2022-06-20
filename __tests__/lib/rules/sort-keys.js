@@ -171,6 +171,22 @@ const test = {
 
     // desc, natural, insensitive, minKeys should ignore unsorted keys when number of keys is less than minKeys
     // { code: "var obj = {a:1, _:2, b:3}", options: ["desc", { natural: true, caseSensitive: false, minKeys: 4 }] }
+
+    // overrides
+    {
+      code: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              properties: ['b'],
+              order: ['y', '$'],
+            },
+          ],
+        },
+      ],
+    },
   ],
   invalid: [
     // move comments on the same line as property together with property
