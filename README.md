@@ -59,9 +59,28 @@ Often it makes sense to enable `sort-keys-plus` only for certain files/directori
 }
 ```
 
+In some cases, there should be a specific order for some properties of an
+object, such as with mongodb aggregations. For that, use the override key of
+the configuration:
+
+```json
+{
+  "rules": {
+    "sort-keys-plus/sort-keys": ["warn", "asc", {
+      "overrides": [
+        {
+          "properties": ["$lookup"],
+          "order": ["from", "localField", "foreignField", "as"]
+        }
+      ]
+    }]
+  }
+}
+```
+
 ## Rule configuration
 
-For available config options, see [official sort-keys reference](https://eslint.org/docs/rules/sort-keys#require-object-keys-to-be-sorted-sort-keys). All options supported by `sort-keys`, besides `minKeys`, are supported by `sort-keys-plus`.
+For available config options, see [official sort-keys reference](https://eslint.org/docs/rules/sort-keys#require-object-keys-to-be-sorted-sort-keys). All options supported by `sort-keys` are supported by `sort-keys-plus`.
 
 
 
