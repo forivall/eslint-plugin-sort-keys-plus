@@ -777,6 +777,27 @@ const test = {
     //   options: ['desc', { natural: true, caseSensitive: false, minKeys: 2 }],
     //   errors: ["Expected object keys to be in natural insensitive descending order. 'b' should be before '_'."],
     // },
+
+    // overrides
+    {
+      code: 'var obj = {a:1, b:{$:1, y:1, a:1}, c:1}',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              message: 'CUSTOM_MESSAGE',
+              properties: ['b'],
+              order: ['y', '$'],
+            },
+          ],
+        },
+      ],
+      errors: [
+        "CUSTOM_MESSAGE 'y' should be before '$'.",
+      ],
+      output: "var obj = {a:1, b:{y:1, $:1, a:1}, c:1}",
+    },
   ],
 }
 
