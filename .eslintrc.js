@@ -5,6 +5,11 @@ module.exports = {
   root: true,
   plugins: ['eslint-plugin'],
   extends: ['eslint', 'plugin:eslint-plugin/recommended', 'prettier'],
+  settings: {
+    jsdoc: {
+      mode: 'typescript'
+    }
+  },
   rules: {
     'no-console': [process.env.NODE_ENV === 'production' ? 'error' : 0, { allow: ['warn', 'error'] }],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 0,
