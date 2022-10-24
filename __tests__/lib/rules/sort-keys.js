@@ -506,19 +506,17 @@ const test = {
       output: `var obj = {...z, a:2, '':1}`,
     },
 
-    // ignore non-simple computed properties, but their position shouldn't affect other comparisons.
+    // ignore non-simple computed properties, but their position shouldn't affect other comparisons. do not fix if computed is between.
     {
       code: "var obj = {a:1, [b+c]:2, '':3}",
       parserOptions: { ecmaVersion: 6 },
       errors: ["Expected object keys to be in ascending order. '' should be before 'a'."],
-      output: "var obj = {'':3, [b+c]:2, a:1}",
     },
     {
       code: "var obj = {'':1, [b+c]:2, a:3}",
       options: ['desc'],
       parserOptions: { ecmaVersion: 6 },
       errors: ["Expected object keys to be in descending order. 'a' should be before ''."],
-      output: "var obj = {a:3, [b+c]:2, '':1}",
     },
     {
       code: "var obj = {b:1, [f()]:2, '':3, a:4}",
@@ -1030,19 +1028,19 @@ const test = {
     {
       code: 'var obj = {b_:1, C:3, c:2}',
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be first. 'c' should be before 'C'."],
+      errors: ["Expected all caps keys to be last. 'c' should be before 'C'."],
       output: 'var obj = {b_:1, c:2, C:3}',
     },
     {
       code: 'var obj = {$:1, _:2, A:3, a:4}',
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be first. 'a' should be before 'A'."],
+      errors: ["Expected all caps keys to be last. 'a' should be before 'A'."],
       output: 'var obj = {$:1, _:2, a:4, A:3}',
     },
     {
       code: "var obj = {'#':1, 'Z':2, À:3, è:4}",
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be first. 'è' should be before 'À'."],
+      errors: ["Expected all caps keys to be last. 'è' should be before 'À'."],
       output: "var obj = {'#':1, 'Z':2, è:4, À:3}",
     },
   ],
