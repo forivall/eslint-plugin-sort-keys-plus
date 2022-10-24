@@ -13,7 +13,8 @@
   ],
   "author": "Emily M Klassen <forivall@gmail.com>",
   "contributors": [
-    "Leonid Buneev <buneev.leonid@gmail.com>"
+    "Leonid Buneev <buneev.leonid@gmail.com>",
+    "ESLint Contributors <https://github.com/eslint/eslint/blob/main/lib/rules/sort-keys.js>"
   ],
   "main": "lib/index.js",
   "scripts": {

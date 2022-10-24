@@ -172,6 +172,202 @@ const test = {
     // desc, natural, insensitive, minKeys should ignore unsorted keys when number of keys is less than minKeys
     { code: 'var obj = {a:1, _:2, b:3}', options: ['desc', { natural: true, caseSensitive: false, minKeys: 4 }] },
 
+    // allowLineSeparatedGroups option
+    {
+      code: `
+        var obj = {
+          e: 1,
+          f: 2,
+          g: 3,
+
+          a: 4,
+          b: 5,
+          c: 6
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+    },
+    {
+      code: `
+        var obj = {
+          b: 1,
+
+          // comment
+          a: 2,
+          c: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+    },
+    {
+      code: `
+        var obj = {
+          b: 1
+
+          ,
+
+          // comment
+          a: 2,
+          c: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+
+          b() {
+          },
+          e: 4
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+          // comment
+
+          // comment
+          b() {
+          },
+          e: 4
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          [a+b]: 1,
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+
+          a() {
+
+          },
+
+          // abce
+          f: 3,
+
+          /*
+
+          */
+          [a+b]: 1,
+          cc: 1,
+          e: 2
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b: "/*",
+
+          a: "*/",
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+    },
+    {
+      code: `
+        var obj = {
+          b,
+          /*
+          */ //
+
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          /*
+          */ //
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b: 1
+
+          ,a: 2
+        };
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b: 1
+        // comment before comma
+
+        ,
+        a: 2
+        };
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          a,
+          ...z,
+          c
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          [foo()]: [
+
+          ],
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    { code: 'var obj = {a:1, _:2, b:3}', options: ['desc', { natural: true, caseSensitive: false, minKeys: 4 }] },
+
     // ALL_CAPS first
     { code: 'var obj = {CA: 0, b_:1, Ca:3, ca:2}', options: ['asc', { caseSensitive: false, allCaps: 'first' }] },
     { code: 'var obj = {CA: 0, b_:1, ca:3, Ca:2}', options: ['asc', { caseSensitive: false, allCaps: 'first' }] },
