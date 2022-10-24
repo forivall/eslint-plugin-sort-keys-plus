@@ -413,6 +413,18 @@ const test = {
       options: ['asc', { shorthand: 'last' }],
       parserOptions: { ecmaVersion: 2018 },
     },
+
+    // ignore single lines
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1}',
+      options: ['asc', { shorthand: 'last', ignoreSingleLine: true }],
+      parserOptions: { ecmaVersion: 2018 }
+    },
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1, e}',
+      options: ['asc', { shorthand: 'last', ignoreSingleLine: true }],
+      parserOptions: { ecmaVersion: 2018 }
+    }
   ],
   invalid: [
     // move comments on the same line as property together with property
@@ -1099,6 +1111,36 @@ const test = {
       errors: ["Expected shorthand properties to be last. 'a' should be before 'd'."],
       output: 'var obj = {a:1, d, b:{x:1, y:1}, c:1, e}',
     },
+
+    // with ignore single line
+    {
+      code: `var obj = {
+        d, a:1, b:{x:1, y:1}, c:1
+      }`,
+      options: ['asc', { shorthand: 'last', ignoreSingleLine: true }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: [
+        "Expected shorthand properties to be last. 'a' should be before 'd'."
+      ],
+      output: `var obj = {
+        a:1, d, b:{x:1, y:1}, c:1
+      }`
+    },
+    {
+      code: `var obj = {
+        d,
+        a:1, b:{x:1, y:1}, c:1, e
+      }`,
+      options: ['asc', { shorthand: 'last', ignoreSingleLine: true }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: [
+        "Expected shorthand properties to be last. 'a' should be before 'd'."
+      ],
+      output: `var obj = {
+        a:1,
+        d, b:{x:1, y:1}, c:1, e
+      }`
+    }
   ],
 }
 
