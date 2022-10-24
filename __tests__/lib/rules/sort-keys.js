@@ -76,7 +76,7 @@ const test = {
     { code: "var obj = {'#':1, 'Z':2, À:3, è:4}", options: ['asc'] },
 
     // asc, minKeys should ignore unsorted keys when number of keys is less than minKeys
-    // { code: "var obj = {a:1, c:2, b:3}", options: ["asc", { minKeys: 4 }] },
+    { code: 'var obj = {a:1, c:2, b:3}', options: ['asc', { minKeys: 4 }] },
 
     // asc, insensitive
     { code: 'var obj = {_:2, a:1, b:3} // asc, insensitive', options: ['asc', { caseSensitive: false }] },
@@ -89,7 +89,7 @@ const test = {
     { code: "var obj = {'#':1, 'Z':2, À:3, è:4}", options: ['asc', { caseSensitive: false }] },
 
     // asc, insensitive, minKeys should ignore unsorted keys when number of keys is less than minKeys
-    // { code: "var obj = {$:1, A:3, _:2, a:4}", options: ["asc", { caseSensitive: false, minKeys: 5 }] },
+    { code: 'var obj = {$:1, A:3, _:2, a:4}', options: ['asc', { caseSensitive: false, minKeys: 5 }] },
 
     // asc, natural
     { code: 'var obj = {_:2, a:1, b:3} // asc, natural', options: ['asc', { natural: true }] },
@@ -101,7 +101,7 @@ const test = {
     { code: "var obj = {'#':1, 'Z':2, À:3, è:4}", options: ['asc', { natural: true }] },
 
     // asc, natural, minKeys should ignore unsorted keys when number of keys is less than minKeys
-    // { code: "var obj = {b_:1, a:2, b:3}", options: ["asc", { natural: true, minKeys: 4 }] },
+    { code: 'var obj = {b_:1, a:2, b:3}', options: ['asc', { natural: true, minKeys: 4 }] },
 
     // asc, natural, insensitive
     {
@@ -117,7 +117,7 @@ const test = {
     { code: "var obj = {'#':1, 'Z':2, À:3, è:4}", options: ['asc', { natural: true, caseSensitive: false }] },
 
     // asc, natural, insensitive, minKeys should ignore unsorted keys when number of keys is less than minKeys
-    // { code: "var obj = {a:1, _:2, b:3}", options: ["asc", { natural: true, caseSensitive: false, minKeys: 4 }] },
+    { code: 'var obj = {a:1, _:2, b:3}', options: ['asc', { natural: true, caseSensitive: false, minKeys: 4 }] },
 
     // desc
     { code: 'var obj = {b:3, a:1, _:2} // desc', options: ['desc'] },
@@ -129,7 +129,7 @@ const test = {
     { code: "var obj = {è:4, À:3, 'Z':2, '#':1}", options: ['desc'] },
 
     // desc, minKeys should ignore unsorted keys when number of keys is less than minKeys
-    // { code: "var obj = {a:1, c:2, b:3}", options: ["desc", { minKeys: 4 }] },
+    { code: 'var obj = {a:1, c:2, b:3}', options: ['desc', { minKeys: 4 }] },
 
     // desc, insensitive
     { code: 'var obj = {b:3, a:1, _:2} // desc, insensitive', options: ['desc', { caseSensitive: false }] },
@@ -142,7 +142,7 @@ const test = {
     { code: "var obj = {è:4, À:3, 'Z':2, '#':1}", options: ['desc', { caseSensitive: false }] },
 
     // desc, insensitive, minKeys should ignore unsorted keys when number of keys is less than minKeys
-    // { code: "var obj = {$:1, _:2, A:3, a:4}", options: ["desc", { caseSensitive: false, minKeys: 5 }] },
+    { code: 'var obj = {$:1, _:2, A:3, a:4}', options: ['desc', { caseSensitive: false, minKeys: 5 }] },
 
     // desc, natural
     { code: 'var obj = {b:3, a:1, _:2} // desc, natural', options: ['desc', { natural: true }] },
@@ -154,7 +154,7 @@ const test = {
     { code: "var obj = {è:4, À:3, 'Z':2, '#':1}", options: ['desc', { natural: true }] },
 
     // desc, natural, minKeys should ignore unsorted keys when number of keys is less than minKeys
-    // { code: "var obj = {b_:1, a:2, b:3}", options: ["desc", { natural: true, minKeys: 4 }] },
+    { code: 'var obj = {b_:1, a:2, b:3}', options: ['desc', { natural: true, minKeys: 4 }] },
 
     // desc, natural, insensitive
     {
@@ -170,7 +170,13 @@ const test = {
     { code: "var obj = {è:4, À:3, 'Z':2, '#':1}", options: ['desc', { natural: true, caseSensitive: false }] },
 
     // desc, natural, insensitive, minKeys should ignore unsorted keys when number of keys is less than minKeys
-    // { code: "var obj = {a:1, _:2, b:3}", options: ["desc", { natural: true, caseSensitive: false, minKeys: 4 }] }
+    { code: 'var obj = {a:1, _:2, b:3}', options: ['desc', { natural: true, caseSensitive: false, minKeys: 4 }] },
+
+    // ALL_CAPS first
+    { code: 'var obj = {CA: 0, b_:1, Ca:3, ca:2}', options: ['asc', { caseSensitive: false, allCaps: 'first' }] },
+    { code: 'var obj = {CA: 0, b_:1, ca:3, Ca:2}', options: ['asc', { caseSensitive: false, allCaps: 'first' }] },
+    { code: 'var obj = {C:2, b_:1, c:3}', options: ['asc', { natural: true, allCaps: 'first' }] },
+    { code: 'var obj = {B:1, a:2}', options: ['asc', { natural: true, allCaps: 'first' }] },
 
     // overrides
     {
@@ -389,11 +395,12 @@ const test = {
     },
 
     // asc, minKeys should error when number of keys is greater than or equal to minKeys
-    // {
-    //   code: 'var obj = {a:1, _:2, b:3}',
-    //   options: ['asc', { minKeys: 3 }],
-    //   errors: ["Expected object keys to be in ascending order. '_' should be before 'a'."],
-    // },
+    {
+      code: 'var obj = {a:1, _:2, b:3}',
+      options: ['asc', { minKeys: 3 }],
+      errors: ["Expected object keys to be in ascending order. '_' should be before 'a'."],
+      output: 'var obj = {_:2, a:1, b:3}',
+    },
 
     // asc, insensitive
     {
@@ -434,11 +441,12 @@ const test = {
     },
 
     // asc, insensitive, minKeys should error when number of keys is greater than or equal to minKeys
-    // {
-    //   code: 'var obj = {a:1, _:2, b:3}',
-    //   options: ['asc', { caseSensitive: false, minKeys: 3 }],
-    //   errors: ["Expected object keys to be in insensitive ascending order. '_' should be before 'a'."],
-    // },
+    {
+      code: 'var obj = {a:1, _:2, b:3}',
+      options: ['asc', { caseSensitive: false, minKeys: 3 }],
+      errors: ["Expected object keys to be in insensitive ascending order. '_' should be before 'a'."],
+      output: 'var obj = {_:2, a:1, b:3}',
+    },
 
     // asc, natural
     {
@@ -485,11 +493,12 @@ const test = {
     },
 
     // asc, natural, minKeys should error when number of keys is greater than or equal to minKeys
-    // {
-    //   code: 'var obj = {a:1, _:2, b:3}',
-    //   options: ['asc', { natural: true, minKeys: 2 }],
-    //   errors: ["Expected object keys to be in natural ascending order. '_' should be before 'a'."],
-    // },
+    {
+      code: 'var obj = {a:1, _:2, b:3}',
+      options: ['asc', { natural: true, minKeys: 2 }],
+      errors: ["Expected object keys to be in natural ascending order. '_' should be before 'a'."],
+      output: 'var obj = {_:2, a:1, b:3}',
+    },
 
     // asc, natural, insensitive
     {
@@ -530,11 +539,12 @@ const test = {
     },
 
     // asc, natural, insensitive, minKeys should error when number of keys is greater than or equal to minKeys
-    // {
-    //   code: 'var obj = {a:1, _:2, b:3}',
-    //   options: ['asc', { natural: true, caseSensitive: false, minKeys: 3 }],
-    //   errors: ["Expected object keys to be in natural insensitive ascending order. '_' should be before 'a'."],
-    // },
+    {
+      code: 'var obj = {a:1, _:2, b:3}',
+      options: ['asc', { natural: true, caseSensitive: false, minKeys: 3 }],
+      errors: ["Expected object keys to be in natural insensitive ascending order. '_' should be before 'a'."],
+      output: 'var obj = {_:2, a:1, b:3}',
+    },
 
     // desc
     {
@@ -590,11 +600,12 @@ const test = {
     },
 
     // desc, minKeys should error when number of keys is greater than or equal to minKeys
-    // {
-    //   code: 'var obj = {a:1, _:2, b:3}',
-    //   options: ['desc', { minKeys: 3 }],
-    //   errors: ["Expected object keys to be in descending order. 'b' should be before '_'."],
-    // },
+    {
+      code: 'var obj = {a:1, _:2, b:3}',
+      options: ['desc', { minKeys: 3 }],
+      errors: ["Expected object keys to be in descending order. 'b' should be before '_'."],
+      output: 'var obj = {a:1, b:3, _:2}',
+    },
 
     // desc, insensitive
     {
@@ -650,11 +661,12 @@ const test = {
     },
 
     // desc, insensitive should error when number of keys is greater than or equal to minKeys
-    // {
-    //   code: 'var obj = {a:1, _:2, b:3}',
-    //   options: ['desc', { caseSensitive: false, minKeys: 2 }],
-    //   errors: ["Expected object keys to be in insensitive descending order. 'b' should be before '_'."],
-    // },
+    {
+      code: 'var obj = {a:1, _:2, b:3}',
+      options: ['desc', { caseSensitive: false, minKeys: 2 }],
+      errors: ["Expected object keys to be in insensitive descending order. 'b' should be before '_'."],
+      output: 'var obj = {a:1, b:3, _:2}',
+    },
 
     // desc, natural
     {
@@ -711,11 +723,12 @@ const test = {
     },
 
     // desc, natural should error when number of keys is greater than or equal to minKeys
-    // {
-    //   code: 'var obj = {a:1, _:2, b:3}',
-    //   options: ['desc', { natural: true, minKeys: 3 }],
-    //   errors: ["Expected object keys to be in natural descending order. 'b' should be before '_'."],
-    // },
+    {
+      code: 'var obj = {a:1, _:2, b:3}',
+      options: ['desc', { natural: true, minKeys: 3 }],
+      errors: ["Expected object keys to be in natural descending order. 'b' should be before '_'."],
+      output: 'var obj = {a:1, b:3, _:2}',
+    },
 
     // desc, natural, insensitive
     {
@@ -772,11 +785,12 @@ const test = {
     },
 
     // desc, natural, insensitive should error when number of keys is greater than or equal to minKeys
-    // {
-    //   code: 'var obj = {a:1, _:2, b:3}',
-    //   options: ['desc', { natural: true, caseSensitive: false, minKeys: 2 }],
-    //   errors: ["Expected object keys to be in natural insensitive descending order. 'b' should be before '_'."],
-    // },
+    {
+      code: 'var obj = {a:1, _:2, b:3}',
+      options: ['desc', { natural: true, caseSensitive: false, minKeys: 2 }],
+      errors: ["Expected object keys to be in natural insensitive descending order. 'b' should be before '_'."],
+      output: 'var obj = {a:1, b:3, _:2}',
+    },
 
     // overrides
     {
@@ -793,10 +807,47 @@ const test = {
           ],
         },
       ],
-      errors: [
-        "CUSTOM_MESSAGE 'y' should be before '$'.",
-      ],
-      output: "var obj = {a:1, b:{y:1, $:1, a:1}, c:1}",
+      errors: ["CUSTOM_MESSAGE 'y' should be before '$'."],
+      output: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
+    },
+
+    // ALL_CAPS first
+    {
+      code: 'var obj = {b_:1, c:3, C:2}',
+      options: ['asc', { caseSensitive: false, allCaps: 'first' }],
+      errors: ["Expected all caps keys to be first. 'C' should be before 'c'."],
+      output: 'var obj = {b_:1, C:2, c:3}',
+    },
+    {
+      code: 'var obj = {b_:1, C:3, c:2}',
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'first' }],
+      errors: ["Expected all caps keys to be first. 'C' should be before 'b_'."],
+      output: 'var obj = {C:3, b_:1, c:2}',
+    },
+    {
+      code: 'var obj = {b_:1, c:3, C:2}',
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'first' }],
+      errors: ["Expected all caps keys to be first. 'C' should be before 'c'."],
+      output: 'var obj = {b_:1, C:2, c:3}',
+    },
+    // ALL_CAPS last
+    {
+      code: 'var obj = {b_:1, C:3, c:2}',
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
+      errors: ["Expected all caps keys to be first. 'c' should be before 'C'."],
+      output: 'var obj = {b_:1, c:2, C:3}',
+    },
+    {
+      code: 'var obj = {$:1, _:2, A:3, a:4}',
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
+      errors: ["Expected all caps keys to be first. 'a' should be before 'A'."],
+      output: 'var obj = {$:1, _:2, a:4, A:3}',
+    },
+    {
+      code: "var obj = {'#':1, 'Z':2, À:3, è:4}",
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
+      errors: ["Expected all caps keys to be first. 'è' should be before 'À'."],
+      output: "var obj = {'#':1, 'Z':2, è:4, À:3}",
     },
   ],
 }
