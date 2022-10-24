@@ -172,6 +172,202 @@ const test = {
     // desc, natural, insensitive, minKeys should ignore unsorted keys when number of keys is less than minKeys
     { code: 'var obj = {a:1, _:2, b:3}', options: ['desc', { natural: true, caseSensitive: false, minKeys: 4 }] },
 
+    // allowLineSeparatedGroups option
+    {
+      code: `
+        var obj = {
+          e: 1,
+          f: 2,
+          g: 3,
+
+          a: 4,
+          b: 5,
+          c: 6
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+    },
+    {
+      code: `
+        var obj = {
+          b: 1,
+
+          // comment
+          a: 2,
+          c: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+    },
+    {
+      code: `
+        var obj = {
+          b: 1
+
+          ,
+
+          // comment
+          a: 2,
+          c: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+
+          b() {
+          },
+          e: 4
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+          // comment
+
+          // comment
+          b() {
+          },
+          e: 4
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          [a+b]: 1,
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+
+          a() {
+
+          },
+
+          // abce
+          f: 3,
+
+          /*
+
+          */
+          [a+b]: 1,
+          cc: 1,
+          e: 2
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b: "/*",
+
+          a: "*/",
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+    },
+    {
+      code: `
+        var obj = {
+          b,
+          /*
+          */ //
+
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          /*
+          */ //
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b: 1
+
+          ,a: 2
+        };
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b: 1
+        // comment before comma
+
+        ,
+        a: 2
+        };
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 6 },
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          a,
+          ...z,
+          c
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          [foo()]: [
+
+          ],
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    { code: 'var obj = {a:1, _:2, b:3}', options: ['desc', { natural: true, caseSensitive: false, minKeys: 4 }] },
+
     // ALL_CAPS first
     { code: 'var obj = {CA: 0, b_:1, Ca:3, ca:2}', options: ['asc', { caseSensitive: false, allCaps: 'first' }] },
     { code: 'var obj = {CA: 0, b_:1, ca:3, Ca:2}', options: ['asc', { caseSensitive: false, allCaps: 'first' }] },
@@ -193,6 +389,42 @@ const test = {
         },
       ],
     },
+
+    // shorthand first
+    {
+      code: 'var obj = {a, _:2, b:3}',
+      options: ['desc', { natural: true, caseSensitive: false, minKeys: 4, shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1}',
+      options: ['asc', { shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+
+    // shorthand last
+    {
+      code: 'var obj = { _:2, b:3,a}',
+      options: ['desc', { natural: true, caseSensitive: false, minKeys: 4, shorthand: 'last' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    {
+      code: 'var obj = {a:1, b:{x:1, y:1}, c:1, d}',
+      options: ['asc', { shorthand: 'last' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+
+    // ignore single lines
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1}',
+      options: ['asc', { shorthand: 'last', ignoreSingleLine: true }],
+      parserOptions: { ecmaVersion: 2018 }
+    },
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1, e}',
+      options: ['asc', { shorthand: 'last', ignoreSingleLine: true }],
+      parserOptions: { ecmaVersion: 2018 }
+    }
   ],
   invalid: [
     // move comments on the same line as property together with property
@@ -310,19 +542,17 @@ const test = {
       output: `var obj = {...z, a:2, '':1}`,
     },
 
-    // ignore non-simple computed properties, but their position shouldn't affect other comparisons.
+    // ignore non-simple computed properties, but their position shouldn't affect other comparisons. do not fix if computed is between.
     {
       code: "var obj = {a:1, [b+c]:2, '':3}",
       parserOptions: { ecmaVersion: 6 },
       errors: ["Expected object keys to be in ascending order. '' should be before 'a'."],
-      output: "var obj = {'':3, [b+c]:2, a:1}",
     },
     {
       code: "var obj = {'':1, [b+c]:2, a:3}",
       options: ['desc'],
       parserOptions: { ecmaVersion: 6 },
       errors: ["Expected object keys to be in descending order. 'a' should be before ''."],
-      output: "var obj = {a:3, [b+c]:2, '':1}",
     },
     {
       code: "var obj = {b:1, [f()]:2, '':3, a:4}",
@@ -834,21 +1064,83 @@ const test = {
     {
       code: 'var obj = {b_:1, C:3, c:2}',
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be first. 'c' should be before 'C'."],
+      errors: ["Expected all caps keys to be last. 'c' should be before 'C'."],
       output: 'var obj = {b_:1, c:2, C:3}',
     },
     {
       code: 'var obj = {$:1, _:2, A:3, a:4}',
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be first. 'a' should be before 'A'."],
+      errors: ["Expected all caps keys to be last. 'a' should be before 'A'."],
       output: 'var obj = {$:1, _:2, a:4, A:3}',
     },
     {
       code: "var obj = {'#':1, 'Z':2, À:3, è:4}",
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be first. 'è' should be before 'À'."],
+      errors: ["Expected all caps keys to be last. 'è' should be before 'À'."],
       output: "var obj = {'#':1, 'Z':2, è:4, À:3}",
     },
+
+    // shorthand first
+    {
+      code: 'var obj = {a:1, b:{x:1, y:1}, c:1, d}',
+      options: ['asc', { shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: ["Expected shorthand properties to be first. 'd' should be before 'c'."],
+      output: 'var obj = {a:1, b:{x:1, y:1}, d, c:1}',
+    },
+    {
+      code: 'var obj = {e,a:1, b:{x:1, y:1}, c:1, d}',
+      options: ['asc', { shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: ["Expected shorthand properties to be first. 'd' should be before 'c'."],
+      output: 'var obj = {e,a:1, b:{x:1, y:1}, d, c:1}',
+    },
+
+    // shorthand last
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1}',
+      options: ['asc', { shorthand: 'last' }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: ["Expected shorthand properties to be last. 'a' should be before 'd'."],
+      output: 'var obj = {a:1, d, b:{x:1, y:1}, c:1}',
+    },
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1, e}',
+      options: ['asc', { shorthand: 'last' }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: ["Expected shorthand properties to be last. 'a' should be before 'd'."],
+      output: 'var obj = {a:1, d, b:{x:1, y:1}, c:1, e}',
+    },
+
+    // with ignore single line
+    {
+      code: `var obj = {
+        d, a:1, b:{x:1, y:1}, c:1
+      }`,
+      options: ['asc', { shorthand: 'last', ignoreSingleLine: true }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: [
+        "Expected shorthand properties to be last. 'a' should be before 'd'."
+      ],
+      output: `var obj = {
+        a:1, d, b:{x:1, y:1}, c:1
+      }`
+    },
+    {
+      code: `var obj = {
+        d,
+        a:1, b:{x:1, y:1}, c:1, e
+      }`,
+      options: ['asc', { shorthand: 'last', ignoreSingleLine: true }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: [
+        "Expected shorthand properties to be last. 'a' should be before 'd'."
+      ],
+      output: `var obj = {
+        a:1,
+        d, b:{x:1, y:1}, c:1, e
+      }`
+    }
   ],
 }
 

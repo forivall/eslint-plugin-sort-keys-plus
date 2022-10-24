@@ -13,7 +13,9 @@
   ],
   "author": "Emily M Klassen <forivall@gmail.com>",
   "contributors": [
-    "Leonid Buneev <buneev.leonid@gmail.com>"
+    "Leonid Buneev <buneev.leonid@gmail.com>",
+    "Dominic Buetow <https://github.com/fxOne>",
+    "ESLint Contributors <https://github.com/eslint/eslint/blob/main/lib/rules/sort-keys.js>"
   ],
   "main": "lib/index.js",
   "scripts": {
@@ -24,12 +26,11 @@
   },
   "dependencies": {
     "escape-string-regexp": "^4.0.0",
-    "espree": "^9.3.2",
-    "esutils": "^2.0.2",
     "natural-compare": "^1.4.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
+    "@tsconfig/node14": "^1.0.3",
     "eslint": "^8.17.0",
     "eslint-config-eslint": "^7.0.0",
     "eslint-config-prettier": "^8.5.0",
@@ -41,7 +42,7 @@
     "prettier": "^2.7.1"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "license": "ISC"
 }
