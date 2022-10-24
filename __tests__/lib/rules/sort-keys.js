@@ -172,6 +172,12 @@ const test = {
     // desc, natural, insensitive, minKeys should ignore unsorted keys when number of keys is less than minKeys
     { code: 'var obj = {a:1, _:2, b:3}', options: ['desc', { natural: true, caseSensitive: false, minKeys: 4 }] },
 
+    // ALL_CAPS first
+    { code: 'var obj = {CA: 0, b_:1, Ca:3, ca:2}', options: ['asc', { caseSensitive: false, allCaps: 'first' }] },
+    { code: 'var obj = {CA: 0, b_:1, ca:3, Ca:2}', options: ['asc', { caseSensitive: false, allCaps: 'first' }] },
+    { code: 'var obj = {C:2, b_:1, c:3}', options: ['asc', { natural: true, allCaps: 'first' }] },
+    { code: 'var obj = {B:1, a:2}', options: ['asc', { natural: true, allCaps: 'first' }] },
+
     // overrides
     {
       code: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
@@ -803,6 +809,45 @@ const test = {
       ],
       errors: ["CUSTOM_MESSAGE 'y' should be before '$'."],
       output: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
+    },
+
+    // ALL_CAPS first
+    {
+      code: 'var obj = {b_:1, c:3, C:2}',
+      options: ['asc', { caseSensitive: false, allCaps: 'first' }],
+      errors: ["Expected all caps keys to be first. 'C' should be before 'c'."],
+      output: 'var obj = {b_:1, C:2, c:3}',
+    },
+    {
+      code: 'var obj = {b_:1, C:3, c:2}',
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'first' }],
+      errors: ["Expected all caps keys to be first. 'C' should be before 'b_'."],
+      output: 'var obj = {C:3, b_:1, c:2}',
+    },
+    {
+      code: 'var obj = {b_:1, c:3, C:2}',
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'first' }],
+      errors: ["Expected all caps keys to be first. 'C' should be before 'c'."],
+      output: 'var obj = {b_:1, C:2, c:3}',
+    },
+    // ALL_CAPS last
+    {
+      code: 'var obj = {b_:1, C:3, c:2}',
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
+      errors: ["Expected all caps keys to be first. 'c' should be before 'C'."],
+      output: 'var obj = {b_:1, c:2, C:3}',
+    },
+    {
+      code: 'var obj = {$:1, _:2, A:3, a:4}',
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
+      errors: ["Expected all caps keys to be first. 'a' should be before 'A'."],
+      output: 'var obj = {$:1, _:2, a:4, A:3}',
+    },
+    {
+      code: "var obj = {'#':1, 'Z':2, À:3, è:4}",
+      options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
+      errors: ["Expected all caps keys to be first. 'è' should be before 'À'."],
+      output: "var obj = {'#':1, 'Z':2, è:4, À:3}",
     },
   ],
 }
