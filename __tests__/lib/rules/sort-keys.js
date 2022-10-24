@@ -389,6 +389,30 @@ const test = {
         },
       ],
     },
+
+    // shorthand first
+    {
+      code: 'var obj = {a, _:2, b:3}',
+      options: ['desc', { natural: true, caseSensitive: false, minKeys: 4, shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1}',
+      options: ['asc', { shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+
+    // shorthand last
+    {
+      code: 'var obj = { _:2, b:3,a}',
+      options: ['desc', { natural: true, caseSensitive: false, minKeys: 4, shorthand: 'last' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    {
+      code: 'var obj = {a:1, b:{x:1, y:1}, c:1, d}',
+      options: ['asc', { shorthand: 'last' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
   ],
   invalid: [
     // move comments on the same line as property together with property
@@ -1042,6 +1066,38 @@ const test = {
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
       errors: ["Expected all caps keys to be last. 'è' should be before 'À'."],
       output: "var obj = {'#':1, 'Z':2, è:4, À:3}",
+    },
+
+    // shorthand first
+    {
+      code: 'var obj = {a:1, b:{x:1, y:1}, c:1, d}',
+      options: ['asc', { shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: ["Expected shorthand properties to be first. 'd' should be before 'c'."],
+      output: 'var obj = {a:1, b:{x:1, y:1}, d, c:1}',
+    },
+    {
+      code: 'var obj = {e,a:1, b:{x:1, y:1}, c:1, d}',
+      options: ['asc', { shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: ["Expected shorthand properties to be first. 'd' should be before 'c'."],
+      output: 'var obj = {e,a:1, b:{x:1, y:1}, d, c:1}',
+    },
+
+    // shorthand last
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1}',
+      options: ['asc', { shorthand: 'last' }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: ["Expected shorthand properties to be last. 'a' should be before 'd'."],
+      output: 'var obj = {a:1, d, b:{x:1, y:1}, c:1}',
+    },
+    {
+      code: 'var obj = {d, a:1, b:{x:1, y:1}, c:1, e}',
+      options: ['asc', { shorthand: 'last' }],
+      parserOptions: { ecmaVersion: 2018 },
+      errors: ["Expected shorthand properties to be last. 'a' should be before 'd'."],
+      output: 'var obj = {a:1, d, b:{x:1, y:1}, c:1, e}',
     },
   ],
 }

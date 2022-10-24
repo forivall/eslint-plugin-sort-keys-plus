@@ -14,6 +14,7 @@
   "author": "Emily M Klassen <forivall@gmail.com>",
   "contributors": [
     "Leonid Buneev <buneev.leonid@gmail.com>",
+    "Dominic Buetow <https://github.com/fxOne>",
     "ESLint Contributors <https://github.com/eslint/eslint/blob/main/lib/rules/sort-keys.js>"
   ],
   "main": "lib/index.js",
