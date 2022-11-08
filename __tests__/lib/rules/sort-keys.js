@@ -1045,38 +1045,38 @@ const test = {
     {
       code: 'var obj = {b_:1, c:3, C:2}',
       options: ['asc', { caseSensitive: false, allCaps: 'first' }],
-      errors: ["Expected all caps keys to be first. 'C' should be before 'c'."],
+      errors: ["Expected all caps object keys to be first. 'C' should be before 'c'."],
       output: 'var obj = {b_:1, C:2, c:3}',
     },
     {
       code: 'var obj = {b_:1, C:3, c:2}',
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'first' }],
-      errors: ["Expected all caps keys to be first. 'C' should be before 'b_'."],
+      errors: ["Expected all caps object keys to be first. 'C' should be before 'b_'."],
       output: 'var obj = {C:3, b_:1, c:2}',
     },
     {
       code: 'var obj = {b_:1, c:3, C:2}',
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'first' }],
-      errors: ["Expected all caps keys to be first. 'C' should be before 'c'."],
+      errors: ["Expected all caps object keys to be first. 'C' should be before 'c'."],
       output: 'var obj = {b_:1, C:2, c:3}',
     },
     // ALL_CAPS last
     {
       code: 'var obj = {b_:1, C:3, c:2}',
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be last. 'c' should be before 'C'."],
+      errors: ["Expected all caps object keys to be last. 'c' should be before 'C'."],
       output: 'var obj = {b_:1, c:2, C:3}',
     },
     {
       code: 'var obj = {$:1, _:2, A:3, a:4}',
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be last. 'a' should be before 'A'."],
+      errors: ["Expected all caps object keys to be last. 'a' should be before 'A'."],
       output: 'var obj = {$:1, _:2, a:4, A:3}',
     },
     {
       code: "var obj = {'#':1, 'Z':2, À:3, è:4}",
       options: ['asc', { natural: true, caseSensitive: false, allCaps: 'last' }],
-      errors: ["Expected all caps keys to be last. 'è' should be before 'À'."],
+      errors: ["Expected all caps object keys to be last. 'è' should be before 'À'."],
       output: "var obj = {'#':1, 'Z':2, è:4, À:3}",
     },
 
