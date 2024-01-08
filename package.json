@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-sort-keys-plus",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Fork of eslint rule that sorts keys in objects (https://eslint.org/docs/rules/sort-keys) with extra features",
   "repository": {
     "url": "https://github.com/forivall/eslint-plugin-sort-keys-plus",
