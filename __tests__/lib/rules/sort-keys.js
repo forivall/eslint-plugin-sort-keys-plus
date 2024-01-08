@@ -389,6 +389,33 @@ const test = {
         },
       ],
     },
+    {
+      code: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              properties: ['b'],
+              ignore: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      code: 'var obj = {a:1, b:{y:1, $:1}, c:1}',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              order: ['y', '$'],
+            },
+          ],
+        },
+      ],
+    },
 
     // shorthand first
     {
@@ -1038,6 +1065,37 @@ const test = {
         },
       ],
       errors: ["CUSTOM_MESSAGE 'y' should be before '$'."],
+      output: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
+    },
+    {
+      code: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              order: ['y', '$'],
+            },
+          ],
+        },
+      ],
+      errors: ["Expected object keys to be in ascending order. '$' should be before 'y'."],
+      output: 'var obj = {a:1, b:{$:1, y:1, a:1}, c:1}',
+    },
+    {
+      code: 'var obj = {a:1, c:1, b:{y:1, $:1, a:1}}',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              properties: ['b'],
+              ignore: true,
+            },
+          ],
+        },
+      ],
+      errors: ["Expected object keys to be in ascending order. 'b' should be before 'c'."],
       output: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
     },
 
