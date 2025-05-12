@@ -31,11 +31,11 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
     "@tsconfig/node14": "^1.0.3",
-    "eslint": "^8.17.0",
+    "eslint": "^8.57.1",
     "eslint-config-eslint": "^7.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-eslint-plugin": "^4.2.0",
-    "eslint-plugin-jsdoc": "^39.3.2",
+    "eslint-plugin-jsdoc": "^50.6.14",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^28.1.1",

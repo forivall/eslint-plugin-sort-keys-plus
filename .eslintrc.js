@@ -16,6 +16,11 @@ module.exports = {
     'no-var': 'warn',
     'prefer-const': 'warn',
     'no-else-return': 'error',
+    'jsdoc/newline-after-description': 0,
+    'jsdoc/tag-lines': [
+      'error',
+      'never',
+    ],
     'vue/order-in-components': 0,
   },
   overrides: [
