@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "escape-string-regexp": "^4.0.0",
+    "esquery": "^1.6.0",
     "natural-compare": "^1.4.0"
   },
   "devDependencies": {

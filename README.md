@@ -206,13 +206,17 @@ Configuration:
           "message": "`title` should be before `description`",
         },
         {
-          "
+          "properties": ["anyOrder"],
+          "ignore": true
         }
       ],
 ```
 
 * `order` define the property keys that should be ordered
-* `properties` define parent property key for this rule. If this is not provided, the override will apply to all objects with a subset of the keys in `order`
+  * `ignore` allow any property key order
+* `esquery` define an [esquery](https://github.com/estools/esquery#readme) filter which must match the target object for this override to apply
+* `properties` define parent property key for this rule. Equivalent to `esquery: 'Property:is([key.name=property1], [key.name=property2]) > .value'`;
+  * If neither `esquery` or `properties` are not provided, the override will apply to all objects with a subset of the keys in `order`
 * `message` optional custom message when the rule is violated
 
 Examples of **incorrect** code for the `{overrides: [{order: ['b', 'a', 'd']}]}` option:
@@ -246,7 +250,7 @@ let obj = {
 };
 ```
 
-Examples of **incorrect** code for the `{overrides: [{properties: ['a'], order: ['b', 'a', 'd']}]}` option:
+Examples of **incorrect** code for the `{overrides: [{esquery: 'Property[key.name=a] > .value', order: ['b', 'a', 'd']}]}` or `{overrides: [{properties: ['a'], order: ['b', 'a', 'd']}]}` option:
 
 ```js
 /*eslint sort-keys-plus/sort-keys: ["error", "asc", {overrides: [{properties: ['a'], order: ['b', 'a', 'd']}]}]*/
@@ -260,7 +264,7 @@ let obj = { a:
   };
 ```
 
-Examples of **correct** code for the `{overrides: [{overrides: [{properties: ['a'], order: ['b', 'a', 'd']}]}` option:
+Examples of **correct** code for the `{overrides: [{esquery: 'Property[key.name=a] > .value', order: ['b', 'a', 'd']}]}` or `{overrides: [{properties: ['a'], order: ['b', 'a', 'd']}]}` option:
 
 ```js
 /*eslint sort-keys-plus/sort-keys: ["error", "asc", {overrides: [{overrides: [{properties: ['a'], order: ['b', 'a', 'd']}]}*/

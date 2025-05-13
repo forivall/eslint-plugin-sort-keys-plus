@@ -397,6 +397,37 @@ const test = {
           overrides: [
             {
               properties: ['b'],
+              order: ['y', '$'],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      code: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}; fn({y: 1, $: 1, a: 1}); otherFn({a: 1, b: 2, y: 3})',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              esquery: [
+                'Property[key.name="b"] > .value',
+                'CallExpression[callee.name="fn"] > .arguments:nth-child(1)'
+              ],
+              order: ['y', '$'],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      code: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              properties: ['b'],
               ignore: true,
             },
           ],
@@ -1059,6 +1090,23 @@ const test = {
             {
               message: 'CUSTOM_MESSAGE',
               properties: ['b'],
+              order: ['y', '$'],
+            },
+          ],
+        },
+      ],
+      errors: ["CUSTOM_MESSAGE 'y' should be before '$'."],
+      output: 'var obj = {a:1, b:{y:1, $:1, a:1}, c:1}',
+    },
+    {
+      code: 'var obj = {a:1, b:{$:1, y:1, a:1}, c:1}',
+      options: [
+        'asc',
+        {
+          overrides: [
+            {
+              message: 'CUSTOM_MESSAGE',
+              esquery: 'Property[key.name="b"] > .value',
               order: ['y', '$'],
             },
           ],
