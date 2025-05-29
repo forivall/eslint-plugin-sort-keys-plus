@@ -33,6 +33,9 @@ const test = {
     { code: "var obj = {'':1, [f()]:2, a:3}", options: [], parserOptions: { ecmaVersion: 6 } },
     { code: "var obj = {a:1, [b++]:2, '':3}", options: ['desc'], parserOptions: { ecmaVersion: 6 } },
 
+    // not ignore simple computed properties.
+    { code: 'var obj = {a:1, [a]: -1, b:3, c:2}', options: [], parserOptions: { ecmaVersion: 6 }, },
+
     // ignore properties separated by spread properties
     { code: 'var obj = {a:1, ...z, b:1}', options: [], parserOptions: { ecmaVersion: 2018 } },
     { code: 'var obj = {b:1, ...z, a:1}', options: [], parserOptions: { ecmaVersion: 2018 } },
@@ -1216,6 +1219,18 @@ const test = {
       parserOptions: { ecmaVersion: 2018 },
       errors: ["Expected shorthand properties to be last. 'a' should be before 'd'."],
       output: 'var obj = {a:1, d, b:{x:1, y:1}, c:1, e}',
+    },
+
+    // shorthand first and ALL_CAPS first
+    {
+      code: 'var obj = {FOO, a, _:2, b:3}',
+      options: ['desc', { natural: true, caseSensitive: false, minKeys: 4, allCaps: 'first', shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
+    },
+    {
+      code: 'var obj = {a, [FOO]: 1, _:2, b:3}',
+      options: ['desc', { natural: true, caseSensitive: false, minKeys: 4, allCaps: 'first', shorthand: 'first' }],
+      parserOptions: { ecmaVersion: 2018 },
     },
 
     // with ignore single line
